@@ -101,7 +101,7 @@ Note that .Net Core 3.x has issues with EF Core using MySQL connector, so projec
 
 20. Click "Run" at the top of visual studio and if swagger was implemented in step 5a, your api should load showing your controller! Test out the methods and hope everything worked! :-D 
 
-21. For each entity model you add in the future you will create services, interfaces for the services, extensions, and controllers, but the process remains the same! 
+21. For each entity model you add in the future you will create services, interfaces for the services, extensions, and controllers, but the process remains the same! When you make changes to your database or add or remove tables simply run the command from step 7 and follow the directions down!
 
 
 **NOTE: Remember: Your connection string from step 7 should be moved to a hidden location which the application pulls from in production, and NEVER pushed to Git or other version control.**
