@@ -21,18 +21,6 @@ namespace GenericEntityCoreApi.Core.Services
             this._customerRepository = customerRepository;
         }
 
-        public async Task AddCustomer(DomCustomer customerToAdd)
-        {
-            var entityRecord = customerToAdd.ToEntityCustomer();
-            await _customerRepository.Add(entityRecord);
-        }
-
-        public async Task DeleteCustomer(DomCustomer customerToDelete)
-        {
-            var entityRecord = customerToDelete.ToEntityCustomer();
-            await _customerRepository.Delete(entityRecord);
-        }
-
         public async Task<List<DomCustomer>> GetAllCustomers()
         {
             var entityCustomers = await _customerRepository.GetAll();
@@ -45,10 +33,23 @@ namespace GenericEntityCoreApi.Core.Services
             return entityRecords.ToDomainCustomerList();
         }
 
+        public async Task AddCustomer(DomCustomer customerToAdd)
+        {
+            var entityRecord = customerToAdd.ToEntityCustomer();
+            await _customerRepository.Add(entityRecord);
+        }
+
         public async Task UpdateCustomer(DomCustomer customerToUpdate)
         {
             var entityRecord = customerToUpdate.ToEntityCustomer();
             await _customerRepository.Update(entityRecord);
         }
+
+        public async Task DeleteCustomer(DomCustomer customerToDelete)
+        {
+            var entityRecord = customerToDelete.ToEntityCustomer();
+            await _customerRepository.Delete(entityRecord);
+        }
+
     }
 }
