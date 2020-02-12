@@ -58,6 +58,7 @@ Note that .Net Core 3.x has issues with EF Core using MySQL connector, so projec
 	- In Startup.cs in the ConfigureServices()
 		- Add the following line (replace with your copied string from the Context file.)
             services.AddDbContext<*yourContextName*>(options => options.UseMySQL(""));
+				- **NOTE: Your connection string should be moved to a hidden location which the application pulls from in production, and NEVER pushed to Git or other version control.**
 			
 8. Create a new folder in your ".Core" project and name it "Models"
 			- Create a model class to match your generated entity classes for each table in your database entity framework generated during step 7
@@ -101,3 +102,6 @@ Note that .Net Core 3.x has issues with EF Core using MySQL connector, so projec
 20. Click "Run" at the top of visual studio and if swagger was implemented in step 5a, your api should load showing your controller! Test out the methods and hope everything worked! :-D 
 
 21. For each entity model you add in the future you will create services, interfaces for the services, extensions, and controllers, but the process remains the same! 
+
+
+**NOTE: Remember: Your connection string from step 7 should be moved to a hidden location which the application pulls from in production, and NEVER pushed to Git or other version control.**
