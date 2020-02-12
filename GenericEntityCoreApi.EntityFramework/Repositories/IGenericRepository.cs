@@ -16,6 +16,5 @@ namespace GenericEntityCoreApi.EntityFramework.Repositories
         Task Delete(T entity);
         Task Update(T entity);
         Task Save();
-
     }
 }

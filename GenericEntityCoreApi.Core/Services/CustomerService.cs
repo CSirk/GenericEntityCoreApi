@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenericEntityCoreApi.Core
+namespace GenericEntityCoreApi.Core.Services
 {
     public class CustomerService : ICustomerService
     {
