@@ -12,6 +12,7 @@ namespace GenericEntityCoreApi.Core.Mapping
         public MappingProfile()
         {
             CreateMap<Customer, DomCustomer>().ReverseMap();
+            CreateMap<Animal, DomAnimal>().ReverseMap();
         }
     }
 }

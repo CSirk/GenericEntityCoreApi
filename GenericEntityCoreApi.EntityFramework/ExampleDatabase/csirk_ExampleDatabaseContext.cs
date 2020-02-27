@@ -15,6 +15,7 @@ namespace GenericEntityCoreApi.EntityFramework.ExampleDatabase
         {
         }
 
+        public virtual DbSet<Animal> Animal { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -27,6 +28,35 @@ namespace GenericEntityCoreApi.EntityFramework.ExampleDatabase
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
+
+            modelBuilder.Entity<Animal>(entity =>
+            {
+                entity.ToTable("Animal", "csirk_ExampleDatabase");
+
+                entity.HasIndex(e => e.Id)
+                    .HasName("Id_UNIQUE")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Name)
+                    .HasName("Name_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnType("int(11)");
+
+                entity.Property(e => e.IsPet).HasColumnType("tinyint(4)");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nickname)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NumberOfLegs).HasColumnType("int(11)");
+            });
 
             modelBuilder.Entity<Customer>(entity =>
             {

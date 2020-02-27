@@ -50,9 +50,13 @@ namespace GenericEntityCoreApi.Api
 
             //Repos
             services.AddTransient<IGenericRepository<csirk_ExampleDatabaseContext, Customer>, CustomerRepository>();
+            services.AddTransient<IGenericRepository<csirk_ExampleDatabaseContext, Animal>, AnimalRepository>();
+
 
             //Services
             services.AddTransient<IGenericService<DomCustomer, Customer, csirk_ExampleDatabaseContext>, CustomerService>();
+            services.AddTransient<IGenericService<DomAnimal, Animal, csirk_ExampleDatabaseContext>, AnimalService>();
+
 
             //Swagger
             services.AddSwaggerGen(c =>
