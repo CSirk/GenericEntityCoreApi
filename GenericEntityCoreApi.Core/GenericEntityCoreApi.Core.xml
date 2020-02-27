@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GenericEntityCoreApi.Core</name>
+    </assembly>
+    <members>
+        <member name="M:GenericEntityCoreApi.Core.Services.GenericService`3.GetAll(System.Linq.Expressions.Expression{System.Func{`1,System.Object}}[])">
+            <summary>
+            Get all records
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GenericEntityCoreApi.Core.Services.GenericService`3.GetSingle(System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`1,System.Object}}[])">
+            <summary>
+            Get a single record
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GenericEntityCoreApi.Core.Services.GenericService`3.LoadMultiple(System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`1,System.Object}}[])">
+            <summary>
+            Load multiple records without tracking
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GenericEntityCoreApi.Core.Services.GenericService`3.LoadSingle(System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`1,System.Object}}[])">
+            <summary>
+            Load a single record without tracking
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GenericEntityCoreApi.Core.Services.GenericService`3.LookupSingle(System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`1,System.Object}}[])">
+            <summary>
+            Looks up whether a record exists by predicate
+            </summary>
+            <param name="predicate"></param>
+            <param name="includes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GenericEntityCoreApi.Core.Services.GenericService`3.Search(System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`1,System.Object}}[])">
+            <summary>
+            Return records matching predicate
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GenericEntityCoreApi.Core.Services.GenericService`3.Add(`0)">
+            <summary>
+            Add a record
+            </summary>
+            <param name="domainRecordToAdd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GenericEntityCoreApi.Core.Services.GenericService`3.Update(`0)">
+            <summary>
+            Update a record
+            </summary>
+            <param name="domainRecordToUpdate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GenericEntityCoreApi.Core.Services.GenericService`3.Delete(`0)">
+            <summary>
+            Delete a record
+            </summary>
+            <param name="domainRecordToDelete"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
