@@ -46,7 +46,42 @@ namespace GenericEntityCoreApi.EntityFramework.Repositories
             return record;
         }
 
-        public virtual async Task<List<T>> FindBy(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        public virtual async Task<bool> LookupSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        {
+            var result = await GetSingle(predicate, includes);
+            return result != null ? true : false;
+        }
+
+        public virtual async Task<T> LoadSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        {
+            if (includes.Length > 0)
+            {
+                var queryable = _context.Set<T>().AsNoTracking().AsQueryable();
+                var result = await includes.Aggregate(queryable, (current, include) => current.Include(include)).Where(predicate).FirstOrDefaultAsync();
+                return result;
+            }
+
+            var record = await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(predicate);
+
+            return record;
+        }
+
+        public virtual async Task<List<T>> LoadMultiple(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        {
+            if (includes.Length > 0)
+            {
+                var queryable = _context.Set<T>().AsNoTracking().AsQueryable();
+                var results = await includes.Aggregate(queryable, (current, include) => current.Include(include)).Where(predicate).ToListAsync();
+                return results;
+            }
+
+            var records = await _context.Set<T>().Where(predicate).AsNoTracking().ToListAsync();
+
+            return records;
+        }
+
+
+        public virtual async Task<List<T>> Search(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
         {
             if (includes.Length > 0)
             {
