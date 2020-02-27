@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenericEntityCoreApi.Core.Interfaces
+namespace GenericEntityCoreApi.Core.Services.Interfaces
 {
     public interface ICustomerService
     {

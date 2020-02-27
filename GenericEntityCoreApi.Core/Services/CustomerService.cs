@@ -1,55 +1,16 @@
-﻿using GenericEntityCoreApi.Core.Extensions;
-using GenericEntityCoreApi.Core.Interfaces;
+﻿using AutoMapper;
 using GenericEntityCoreApi.Core.Models;
 using GenericEntityCoreApi.EntityFramework.ExampleDatabase;
 using GenericEntityCoreApi.EntityFramework.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GenericEntityCoreApi.Core.Services
 {
-    public class CustomerService : ICustomerService
+    public class CustomerService : GenericService<DomCustomer, Customer, csirk_ExampleDatabaseContext>
     {
-        private readonly IGenericRepository<csirk_ExampleDatabaseContext, Customer> _customerRepository;
-
         public CustomerService(
-            IGenericRepository<csirk_ExampleDatabaseContext, Customer> customerRepository)
+            IGenericRepository<csirk_ExampleDatabaseContext, Customer> repository,
+            IMapper mapper) : base(repository, mapper)
         {
-            this._customerRepository = customerRepository;
         }
-
-        public async Task<List<DomCustomer>> GetAllCustomers()
-        {
-            var entityCustomers = await _customerRepository.GetAll();
-            return entityCustomers.ToDomainCustomerList();
-        }
-
-        public async Task<List<DomCustomer>> SearchCustomers(Expression<Func<Customer, bool>> predicate)
-        {
-            var entityRecords = await _customerRepository.FindBy(predicate);
-            return entityRecords.ToDomainCustomerList();
-        }
-
-        public async Task AddCustomer(DomCustomer customerToAdd)
-        {
-            var entityRecord = customerToAdd.ToEntityCustomer();
-            await _customerRepository.Add(entityRecord);
-        }
-
-        public async Task UpdateCustomer(DomCustomer customerToUpdate)
-        {
-            var entityRecord = customerToUpdate.ToEntityCustomer();
-            await _customerRepository.Update(entityRecord);
-        }
-
-        public async Task DeleteCustomer(DomCustomer customerToDelete)
-        {
-            var entityRecord = customerToDelete.ToEntityCustomer();
-            await _customerRepository.Delete(entityRecord);
-        }
-
     }
 }

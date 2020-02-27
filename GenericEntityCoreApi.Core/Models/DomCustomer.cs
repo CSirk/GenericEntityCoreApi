@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GenericEntityCoreApi.Core.Models
+﻿namespace GenericEntityCoreApi.Core.Models
 {
     public class DomCustomer
     {

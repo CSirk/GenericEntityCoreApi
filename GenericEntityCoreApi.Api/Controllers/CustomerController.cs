@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GenericEntityCoreApi.Core.Interfaces;
 using GenericEntityCoreApi.Core.Models;
+using GenericEntityCoreApi.Core.Services;
+using GenericEntityCoreApi.Core.Services.Interfaces;
+using GenericEntityCoreApi.EntityFramework.ExampleDatabase;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +15,10 @@ namespace GenericEntityCoreApi.Api.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly ICustomerService _customerService;
+        private readonly IGenericService<DomCustomer, Customer, csirk_ExampleDatabaseContext> _customerService;
 
-        public CustomerController(ICustomerService customerService)
+        public CustomerController(
+            IGenericService<DomCustomer, Customer, csirk_ExampleDatabaseContext> customerService)
         {
             this._customerService = customerService;
         }
@@ -23,7 +26,25 @@ namespace GenericEntityCoreApi.Api.Controllers
         [HttpGet("GetAllCustomers")]
         public async Task<List<DomCustomer>> GetCustomers()
         {
-            return await _customerService.GetAllCustomers();
+            return await _customerService.GetAll();
+        }
+
+        [HttpGet("GetSingleCustomer")]
+        public async Task<DomCustomer> GetSingleCustomer([FromQuery] string searchType, [FromQuery] string searchTerm)
+        {
+            switch (searchType)
+            {
+                case "FirstName":
+                    return await _customerService.GetSingle(x => x.FirstName == searchTerm);
+                case "LastName":
+                    return await _customerService.GetSingle(x => x.LastName == searchTerm);
+                case "Age":
+                    return await _customerService.GetSingle(x => x.Age == Convert.ToInt32(searchTerm));
+                case "Gender":
+                    return await _customerService.GetSingle(x => x.Gender == searchTerm);
+                default:
+                    throw new Exception("Search Type not supported.");
+            }
         }
 
         [HttpGet("SearchCustomers")]
@@ -32,13 +53,31 @@ namespace GenericEntityCoreApi.Api.Controllers
             switch(searchType)
             {
                 case "FirstName":
-                    return await _customerService.SearchCustomers(x => x.FirstName == searchTerm);
+                    return await _customerService.Search(x => x.FirstName == searchTerm);
                 case "LastName":
-                    return await _customerService.SearchCustomers(x => x.LastName == searchTerm);
+                    return await _customerService.Search(x => x.LastName == searchTerm);
                 case "Age":
-                    return await _customerService.SearchCustomers(x => x.Age == Convert.ToInt32(searchTerm));
+                    return await _customerService.Search(x => x.Age == Convert.ToInt32(searchTerm));
                 case "Gender":
-                    return await _customerService.SearchCustomers(x => x.Gender == searchTerm);
+                    return await _customerService.Search(x => x.Gender == searchTerm);
+                default:
+                    throw new Exception("Search Type not supported.");
+            }
+        }
+
+        [HttpGet("LookUpSingleCustomer")]
+        public async Task<bool> LookUpCustomer([FromQuery] string searchType, [FromQuery] string searchTerm)
+        {
+            switch (searchType)
+            {
+                case "FirstName":
+                    return await _customerService.LookupSingle(x => x.FirstName == searchTerm);
+                case "LastName":
+                    return await _customerService.LookupSingle(x => x.LastName == searchTerm);
+                case "Age":
+                    return await _customerService.LookupSingle(x => x.Age == Convert.ToInt32(searchTerm));
+                case "Gender":
+                    return await _customerService.LookupSingle(x => x.Gender == searchTerm);
                 default:
                     throw new Exception("Search Type not supported.");
             }
@@ -47,19 +86,19 @@ namespace GenericEntityCoreApi.Api.Controllers
         [HttpPost("AddCustomer")]
         public async Task AddCustomer([FromBody] DomCustomer customerToAdd)
         {
-            await _customerService.AddCustomer(customerToAdd);
+            await _customerService.Add(customerToAdd);
         }
 
         [HttpPost("UpdateCustomer")]
         public async Task UpdateCustomer([FromBody] DomCustomer customerToUpdate)
         {
-            await _customerService.UpdateCustomer(customerToUpdate);
+            await _customerService.Update(customerToUpdate);
         }
 
         [HttpDelete("DeleteCustomer")]
         public async Task DeleteCustomer([FromBody] DomCustomer customerToDelete)
         {
-            await _customerService.DeleteCustomer(customerToDelete);
+            await _customerService.Delete(customerToDelete);
         }
     }
 }
