@@ -15,6 +15,7 @@
             Get a single record
             </summary>
             <param name="predicate"></param>
+            <param name="includes"></param>
             <returns></returns>
         </member>
         <member name="M:GenericEntityCoreApi.Core.Services.GenericService`3.LoadMultiple(System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`1,System.Object}}[])">
@@ -22,6 +23,7 @@
             Load multiple records without tracking
             </summary>
             <param name="predicate"></param>
+            <param name="includes"></param>
             <returns></returns>
         </member>
         <member name="M:GenericEntityCoreApi.Core.Services.GenericService`3.LoadSingle(System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`1,System.Object}}[])">
@@ -29,6 +31,7 @@
             Load a single record without tracking
             </summary>
             <param name="predicate"></param>
+            <param name="includes"></param>
             <returns></returns>
         </member>
         <member name="M:GenericEntityCoreApi.Core.Services.GenericService`3.LookupSingle(System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`1,System.Object}}[])">
@@ -44,6 +47,7 @@
             Return records matching predicate
             </summary>
             <param name="predicate"></param>
+            <param name="includes"></param>
             <returns></returns>
         </member>
         <member name="M:GenericEntityCoreApi.Core.Services.GenericService`3.Add(`0)">

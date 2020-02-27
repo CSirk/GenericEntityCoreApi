@@ -40,6 +40,7 @@ namespace GenericEntityCoreApi.Core.Services
         /// Get a single record
         /// </summary>
         /// <param name="predicate"></param>
+        /// <param name="includes"></param>
         /// <returns></returns>
         public virtual async Task<TDomain> GetSingle(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes)
         {
@@ -51,6 +52,7 @@ namespace GenericEntityCoreApi.Core.Services
         /// Load multiple records without tracking
         /// </summary>
         /// <param name="predicate"></param>
+        /// <param name="includes"></param>
         /// <returns></returns>
         public virtual async Task<List<TDomain>> LoadMultiple(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes)
         {
@@ -62,6 +64,7 @@ namespace GenericEntityCoreApi.Core.Services
         /// Load a single record without tracking
         /// </summary>
         /// <param name="predicate"></param>
+        /// <param name="includes"></param>
         /// <returns></returns>
         public virtual async Task<TDomain> LoadSingle(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes)
         {
@@ -85,6 +88,7 @@ namespace GenericEntityCoreApi.Core.Services
         /// Return records matching predicate
         /// </summary>
         /// <param name="predicate"></param>
+        /// <param name="includes"></param>
         /// <returns></returns>
         public async Task<List<TDomain>> Search(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes)
         {
